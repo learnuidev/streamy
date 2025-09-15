@@ -1,6 +1,7 @@
 "use client";
 
 import { ChatMessage } from "../deepseek-chat.types";
+import Markdown from "react-markdown";
 
 function ChatBubble({ message }: { message: ChatMessage }) {
   const base =
@@ -9,6 +10,7 @@ function ChatBubble({ message }: { message: ChatMessage }) {
     message.role === "user"
       ? "bg-indigo-600 text-white"
       : "bg-gray-200 text-gray-800";
+
   return (
     <div
       className={`mb-3 flex ${
@@ -16,14 +18,21 @@ function ChatBubble({ message }: { message: ChatMessage }) {
       }`}
     >
       <div className={`${base} ${styles}`}>
-        {message.content ||
-          (message.role === "assistant" && (
+        {message.role === "assistant" ? (
+          message.content ? (
+            <Markdown>{message.content}</Markdown>
+          ) : (
             <span className="animate-pulse">...</span>
-          ))}
+          )
+        ) : (
+          message.content
+        )}
       </div>
     </div>
   );
 }
+
+export default ChatBubble;
 
 export function ChatMessages({
   messages,
