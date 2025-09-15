@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback, FormEvent } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ChatMessage } from "../deepseek-chat.types";
 import { generateId } from "../utils/generate-id";
 
